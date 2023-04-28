@@ -1,13 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://dhef1m3eungyw"]
 
 [ext_resource type="PackedScene" uid="uid://dibgpmffabi0j" path="res://assets/floor/floor.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://didrtoqoiijvy" path="res://assets/player/player.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://7aw6385itbgj" path="res://assets/player/player.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://do4vds57udm0o" path="res://assets/Mobs/Ball/Ball.tscn" id="3_o0rr8"]
 
 [node name="sample_scene" type="Node2D"]
 
 [node name="player" parent="." instance=ExtResource("2")]
 position = Vector2(78, 144)
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+position = Vector2(0, -81)
+zoom = Vector2(0.75, 0.75)
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
 
 [node name="floor" parent="." instance=ExtResource("1")]
 

@@ -1,14 +1,12 @@
 extends BaseState
 
-@export var jump_force:float = 150
-@export var move_speed:float = 75
+@export var jump_force:float = 32
+@export var move_speed:float = 100
 @export var fall_node:NodePath
 @export var run_node:NodePath
 @export var walk_node:NodePath
 @export var idle_node:NodePath
 @export var double_jump_node:NodePath
-
-var action_released: bool = false
 
 @onready var fall_state: BaseState = get_node(fall_node)
 @onready var double_jump_state: BaseState = get_node(double_jump_node)
@@ -20,9 +18,11 @@ func enter() -> void:
 	# This calls the base class enter function, which is necessary here
 	# to make sure the animation switches
 	super.enter()
+	player.velocity.y = 0
 	player.velocity.y = -jump_force
-	player.jumps-=1
+	player.jumps -=1
 
+@warning_ignore("unused_parameter")
 func physics_process(delta: float) -> BaseState:
 	var move = 0
 	if Input.is_action_pressed("move_left"):
@@ -31,8 +31,7 @@ func physics_process(delta: float) -> BaseState:
 	elif Input.is_action_pressed("move_right"):
 		move = 1
 		player.flip.scale.x = 1
-	if Input.is_action_just_released("jump"):
-		action_released = true
+	
 	player.velocity.x = move * move_speed
 	player.velocity.y += player.gravity
 	player.set_velocity(player.velocity)
@@ -42,8 +41,7 @@ func physics_process(delta: float) -> BaseState:
 	
 	if player.velocity.y > 0:
 		return fall_state
-	if action_released && Input.is_action_just_pressed("jump")&& player.jumps>0:
-		return double_jump_state
+
 	if player.is_on_floor():
 		if move != 0:
 			if Input.is_action_pressed("run"):
@@ -51,6 +49,3 @@ func physics_process(delta: float) -> BaseState:
 			return walk_state
 		return idle_state
 	return null
-
-func exit():
-	action_released = false

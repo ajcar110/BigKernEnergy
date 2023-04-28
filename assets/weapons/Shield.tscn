@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjk1t51cloi4t"]
+
+[ext_resource type="Script" path="res://Shield.gd" id="1_32nrv"]
+[ext_resource type="Texture2D" uid="uid://cr42inujlb2cc" path="res://assets/player/Sprites/Bounce shield.png" id="2_gsnvu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ky1pm"]
+radius = 8.0
+
+[node name="Shield" type="CharacterBody2D" node_paths=PackedStringArray("throw_timer")]
+collision_layer = 64
+script = ExtResource("1_32nrv")
+throw_speed = 1.0
+throw_timer = NodePath("ReturnTimer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ky1pm")
+
+[node name="ReturnTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="ShieldHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ShieldHitbox"]
+shape = SubResource("CircleShape2D_ky1pm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gsnvu")
+
+[connection signal="timeout" from="ReturnTimer" to="." method="_on_return_timer_timeout"]
+[connection signal="body_entered" from="ShieldHitbox" to="." method="_on_area_2d_body_entered"]

@@ -6,6 +6,8 @@ extends BaseState
 @export var run_node:NodePath
 @export var roll_node:NodePath
 @export var attack1_node:NodePath
+@export var grab_node: NodePath
+@export var throwing_shield_node:NodePath
 
 @onready var jump_state: BaseState = get_node(jump_node)
 @onready var fall_state: BaseState = get_node(fall_node)
@@ -13,13 +15,16 @@ extends BaseState
 @onready var run_state: BaseState = get_node(run_node)
 @onready var roll_state: BaseState = get_node(roll_node)
 @onready var attack1_state: BaseState = get_node(attack1_node)
+@onready var grab_state: BaseState = get_node(grab_node)
+@onready var throwing_shield_state: BaseState = get_node(throwing_shield_node)
 
 func enter() -> void:
 	super.enter()
 	player.velocity.x = 0
+	player.jumps = 3
 
 func input(event: InputEvent) -> BaseState:
-	if Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right"):
+	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
 		if Input.is_action_pressed("run"):
 			return run_state
 		return walk_state
@@ -29,6 +34,10 @@ func input(event: InputEvent) -> BaseState:
 		return roll_state
 	elif Input.is_action_just_pressed("attack"):
 		return attack1_state
+	elif Input.is_action_just_pressed("throw")&& !player.shield_out && !player.holding:
+		return throwing_shield_state
+	elif Input.is_action_just_pressed("grab") && !player.holding:
+		return grab_state
 	return null
 
 func physics_process(delta: float) -> BaseState:

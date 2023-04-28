@@ -5,7 +5,8 @@ extends MoveState
 var current_roll_time: float = 0
 var roll_direction: int = 0
 
-# Upon entering the state, set roll direction to either current input or the direction the player is facing if no input is pressed
+# Upon entering the state, set roll direction to either current input or the direction the player 
+#is facing if no input is pressed. Disables the player hurtbox
 func enter() -> void:
 	super.enter()
 	
@@ -15,6 +16,9 @@ func enter() -> void:
 		roll_direction = -1
 	else:
 		roll_direction = 1
+	
+	player.HurtBox.monitoring = false
+	player.HurtBox.monitorable = false
 
 # Override MoveState input() since we don't want to change states based on player input
 func input(event: InputEvent) -> BaseState:
@@ -36,3 +40,7 @@ func process(delta: float) -> BaseState:
 			return run_state
 		return walk_state
 	return idle_state
+
+func exit() -> void:
+	player.HurtBox.monitoring = true
+	player.HurtBox.monitorable = true

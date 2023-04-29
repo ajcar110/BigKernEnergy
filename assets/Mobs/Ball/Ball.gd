@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var sfx =$AudioStreamPlayer
+@onready var Hitsfx =$AudioStreamPlayer
 
 #func _physics_process(delta):
 #	velocity= Vector2(0,-1)
@@ -14,3 +14,7 @@ func _on_hurtbox_area_entered(area):
 	if area.name == "ShieldHitbox":
 		print("bong")
 		
+
+
+func playHit():
+	Hitsfx.play()

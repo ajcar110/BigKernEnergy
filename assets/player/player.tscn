@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://7aw6385itbgj"]
+[gd_scene load_steps=47 format=3 uid="uid://emp6ngbm14j3"]
 
 [ext_resource type="Script" path="res://assets/player/player.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dw3bu1txnr0hg" path="res://assets/weapons/hurtbox.tscn" id="2_jdnjj"]
@@ -15,16 +15,16 @@
 [ext_resource type="Texture2D" uid="uid://60t43fvvi15r" path="res://assets/player/Sprites/WALK.png" id="10_sqddb"]
 [ext_resource type="Texture2D" uid="uid://bf2vosfk43rgh" path="res://assets/player/Sprites/Run.png" id="11_tlal5"]
 [ext_resource type="Texture2D" uid="uid://btrppp6pi7d6l" path="res://assets/player/Sprites/AIR.png" id="12_tdl8h"]
+[ext_resource type="Script" path="res://assets/player/states/Doublejump.gd" id="12_u4nns"]
 [ext_resource type="Texture2D" uid="uid://djd7nkiqwhv1b" path="res://assets/player/Sprites/Roll.png" id="13_osq8w"]
-[ext_resource type="Script" path="res://assets/player/throwShield.gd" id="13_v8ece"]
 [ext_resource type="PackedScene" uid="uid://bjk1t51cloi4t" path="res://assets/weapons/Shield.tscn" id="14_6774i"]
 [ext_resource type="Script" path="res://assets/player/debugStateLabel.gd" id="14_bxfw1"]
+[ext_resource type="Script" path="res://assets/player/states/Grab.gd" id="14_t8v7x"]
 [ext_resource type="Texture2D" uid="uid://c34015gvpiprg" path="res://assets/player/Sprites/JAB.png" id="15_077fr"]
-[ext_resource type="Script" path="res://assets/player/Doublejump.gd" id="15_yf54c"]
-[ext_resource type="Script" path="res://assets/player/Grab.gd" id="16_c1ogn"]
+[ext_resource type="Script" path="res://assets/player/states/throwShield.gd" id="15_ifs2y"]
 [ext_resource type="Texture2D" uid="uid://1v4qg0laljwo" path="res://assets/player/Sprites/kicks.png" id="16_v3ekc"]
+[ext_resource type="Script" path="res://assets/player/states/throwsmall.gd" id="17_akps4"]
 [ext_resource type="Texture2D" uid="uid://b2xn42osek0eg" path="res://assets/player/Sprites/Punch.png" id="17_i4p6i"]
-[ext_resource type="Script" path="res://assets/player/throwsmall.gd" id="17_vvvg3"]
 [ext_resource type="Texture2D" uid="uid://c5t5osjceu2ky" path="res://assets/player/Sprites/aim.png" id="20_mg4bp"]
 [ext_resource type="Texture2D" uid="uid://f62wlol7mvhl" path="res://assets/player/Sprites/D_Jump.png" id="23_b2du6"]
 
@@ -292,6 +292,46 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
+[sub_resource type="Animation" id="Animation_3od54"]
+resource_name = "doublejump"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flip/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("23_b2du6")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flip/Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flip/Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
 [sub_resource type="Animation" id="Animation_3kh0t"]
 resource_name = "fall"
 length = 0.1
@@ -330,6 +370,60 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_evy4m"]
+resource_name = "grab"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flip/Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_i4p6i")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flip/Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flip/Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ready_to_attack"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_ohjxx"]
@@ -493,47 +587,6 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_brclv"]
-resource_name = "walk"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Flip/Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("10_sqddb")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Flip/Sprite:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Flip/Sprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-
 [sub_resource type="Animation" id="Animation_k33p2"]
 resource_name = "throwing"
 length = 0.6
@@ -589,9 +642,10 @@ tracks/3/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_3od54"]
-resource_name = "doublejump"
-length = 0.6
+[sub_resource type="Animation" id="Animation_brclv"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -602,7 +656,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("23_b2du6")]
+"values": [ExtResource("10_sqddb")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -614,7 +668,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [6]
+"values": [8]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -623,64 +677,10 @@ tracks/2/path = NodePath("Flip/Sprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-
-[sub_resource type="Animation" id="Animation_evy4m"]
-resource_name = "grab"
-length = 0.9
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Flip/Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("17_i4p6i")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Flip/Sprite:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [9]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Flip/Sprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.7),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"ready_to_attack"
-}]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xd3eb"]
@@ -729,7 +729,7 @@ texture = ExtResource("2_n1mwj")
 hframes = 10
 
 [node name="Hitbox" parent="Flip" instance=ExtResource("4_i5611")]
-visible = false
+collision_mask = 32
 monitoring = false
 
 [node name="CollisionShape2D" parent="Flip/Hitbox" index="0"]
@@ -737,7 +737,7 @@ position = Vector2(13, -14)
 shape = SubResource("RectangleShape2D_1wxjy")
 
 [node name="Hitbox2" parent="Flip" instance=ExtResource("4_i5611")]
-visible = false
+collision_mask = 32
 monitoring = false
 
 [node name="CollisionShape2D" parent="Flip/Hitbox2" index="0"]
@@ -817,7 +817,7 @@ double_jump_node = NodePath("../Doublejump")
 animation_name = "jump"
 
 [node name="Doublejump" type="Node" parent="state_manager"]
-script = ExtResource("15_yf54c")
+script = ExtResource("12_u4nns")
 jump_force = 150.0
 fall_node = NodePath("../fall")
 run_node = NodePath("../run")
@@ -863,12 +863,12 @@ hitbox_node = NodePath("../../Flip/Hitbox2")
 animation_name = "attack3"
 
 [node name="Grab" type="Node" parent="state_manager"]
-script = ExtResource("16_c1ogn")
+script = ExtResource("14_t8v7x")
 throw_small_node = NodePath("../throwsmall")
 animation_name = "grab"
 
 [node name="throwShield" type="Node" parent="state_manager"]
-script = ExtResource("13_v8ece")
+script = ExtResource("15_ifs2y")
 Projectile = ExtResource("14_6774i")
 idle_node = NodePath("../idle")
 fall_node = NodePath("../fall")
@@ -877,12 +877,21 @@ run_node = NodePath("../run")
 animation_name = "throwing"
 
 [node name="throwsmall" type="Node" parent="state_manager"]
-script = ExtResource("17_vvvg3")
+script = ExtResource("17_akps4")
 idle_node = NodePath("../idle")
 fall_node = NodePath("../fall")
 walk_node = NodePath("../walk")
 run_node = NodePath("../run")
 animation_name = "throwing"
+
+[node name="airAttack1" type="Node" parent="state_manager"]
+script = ExtResource("10_82tip")
+
+[node name="airAttack2" type="Node" parent="state_manager"]
+script = ExtResource("10_82tip")
+
+[node name="airAttack3" type="Node" parent="state_manager"]
+script = ExtResource("10_82tip")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"

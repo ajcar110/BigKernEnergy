@@ -13,4 +13,6 @@ func _process(delta):
 
 func _on_area_entered(area):
 	if area.name == "Hurtbox":
-		area.get_parent().sfx.play()
+		print("hit " + area.get_parent().name)
+		var enemy = area.get_parent()
+		enemy.playHit()

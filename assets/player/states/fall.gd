@@ -5,11 +5,13 @@ extends BaseState
 @export var walk_node:NodePath
 @export var idle_node:NodePath
 @export var double_jump_node:NodePath
+@export var air_attack_node: NodePath
 
 @onready var run_state: BaseState = get_node(run_node)
 @onready var double_jump_state: BaseState = get_node(double_jump_node)
 @onready var walk_state: BaseState = get_node(walk_node)
 @onready var idle_state: BaseState = get_node(idle_node)
+@onready var air_attack_state: BaseState = get_node(air_attack_node)
 
 func physics_process(delta: float) -> BaseState:
 	var move = 0
@@ -21,6 +23,8 @@ func physics_process(delta: float) -> BaseState:
 		player.flip.scale.x = 1
 	if Input.is_action_just_pressed("jump")&& player.jumps>0:
 		return double_jump_state
+	if Input.is_action_just_pressed("attack"):
+		return air_attack_state
 	player.velocity.x = move * move_speed
 	player.velocity.y += player.gravity
 	player.set_velocity(player.velocity)

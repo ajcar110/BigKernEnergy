@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm6yucjd106vy"]
+
+[ext_resource type="Texture2D" uid="uid://ctvm0byoo1i3y" path="res://assets/Mobs/Hydra/HydraNeckpiece.png" id="1_yx7t7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5em32"]
+radius = 5.0
+height = 16.0
+
+[node name="HydraNeck" type="RigidBody2D"]
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yx7t7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_5em32")

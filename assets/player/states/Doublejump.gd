@@ -7,12 +7,14 @@ extends BaseState
 @export var walk_node:NodePath
 @export var idle_node:NodePath
 @export var double_jump_node:NodePath
+@export var air_attack_node: NodePath
 
 @onready var fall_state: BaseState = get_node(fall_node)
 @onready var double_jump_state: BaseState = get_node(double_jump_node)
 @onready var run_state: BaseState = get_node(run_node)
 @onready var walk_state: BaseState = get_node(walk_node)
 @onready var idle_state: BaseState = get_node(idle_node)
+@onready var air_attack_state: BaseState = get_node(air_attack_node)
 
 func enter() -> void:
 	# This calls the base class enter function, which is necessary here

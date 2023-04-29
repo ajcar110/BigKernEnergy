@@ -14,11 +14,11 @@ hitsfx_node = NodePath("Hitsfx")
 [node name="Hurtbox" parent="." instance=ExtResource("1_f07hx")]
 collision_layer = 32
 
-[node name="Hitbox" parent="." instance=ExtResource("2_a6kx8")]
-
 [node name="Flip" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Flip"]
+
+[node name="Hitbox" parent="Flip" instance=ExtResource("2_a6kx8")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 

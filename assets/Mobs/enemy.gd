@@ -5,8 +5,7 @@ extends CharacterBody2D
 
 @onready var Hitsfx = get_node(hitsfx_node)
 
-func  _ready():
-	playHit()
+var gravity: float = 5
 
 
 func playHit():

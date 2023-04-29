@@ -1,4 +1,5 @@
 extends BaseState
+
 @export var next_attack_node:NodePath
 @export var idle_node:NodePath
 @export var jump_node:NodePath
@@ -18,7 +19,6 @@ extends BaseState
 @onready var hitbox: Area2D = get_node(hitbox_node)
 
 var attack_pressed = false
-
 
 func enter(_msg := {}) -> void:
 	player.animations.play(animation_name)
@@ -58,8 +58,14 @@ func process(delta):
 				return walk_state
 			else:
 				return idle_state
+		else:
+			return fall_state
 	if player.can_attack and attack_pressed:
 		return next_attack_state
 
 func exit():
 	hitbox.monitoring = false
+
+
+
+

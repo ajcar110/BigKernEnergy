@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dibgpmffabi0j" path="res://assets/floor/floor.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://hqe2bfsmirog" path="res://assets/BGS/Forest test/ForestBG1.png" id="1_ptkqk"]
-[ext_resource type="PackedScene" uid="uid://emp6ngbm14j3" path="res://assets/player/player.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://hphiw38lau6e" path="res://assets/player/player.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://b21f5qtok8j47" path="res://assets/BGS/Forest test/ForestBG2.png" id="2_tkrfo"]
 [ext_resource type="PackedScene" uid="uid://b3wc6v20vcynt" path="res://assets/Mobs/Ball/Ball.tscn" id="3_o0rr8"]
 [ext_resource type="PackedScene" uid="uid://bw1t6jbvt5out" path="res://assets/Mobs/Hydra/hydra.tscn" id="6_bjj5a"]
@@ -38,5 +38,4 @@ motion_mirroring = Vector2(480, 0)
 texture = ExtResource("2_tkrfo")
 
 [node name="Hydra" parent="." instance=ExtResource("6_bjj5a")]
-position = Vector2(294, 144)
-script = null
+position = Vector2(233, 144)

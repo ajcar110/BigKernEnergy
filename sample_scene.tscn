@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhef1m3eungyw"]
+[gd_scene load_steps=6 format=3 uid="uid://dhef1m3eungyw"]
 
 [ext_resource type="PackedScene" uid="uid://dibgpmffabi0j" path="res://assets/floor/floor.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://hqe2bfsmirog" path="res://assets/BGS/Forest test/ForestBG1.png" id="1_ptkqk"]
 [ext_resource type="PackedScene" uid="uid://dv316eq2r1rs6" path="res://assets/player/player.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://b21f5qtok8j47" path="res://assets/BGS/Forest test/ForestBG2.png" id="2_tkrfo"]
+[ext_resource type="PackedScene" uid="uid://blct0oc24qlq1" path="res://assets/Mobs/Ball/ball.tscn" id="5_u35ck"]
 
 [node name="sample_scene" type="Node2D"]
 
@@ -18,8 +19,8 @@ position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-offset = Vector2(0, 10)
-transform = Transform2D(1, 0, 0, 1, 0, 10)
+offset = Vector2(0, 45)
+transform = Transform2D(1, 0, 0, 1, 0, 45)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
@@ -34,3 +35,6 @@ motion_mirroring = Vector2(480, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 texture = ExtResource("2_tkrfo")
+
+[node name="Ball" parent="." instance=ExtResource("5_u35ck")]
+position = Vector2(147, 135)

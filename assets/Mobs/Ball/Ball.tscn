@@ -1,38 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://qbhjrpmxdbve"]
+[gd_scene load_steps=6 format=3 uid="uid://blct0oc24qlq1"]
 
-[ext_resource type="Texture2D" uid="uid://bj5nj2eyntuii" path="res://assets/Mobs/Ball/Punchball.png" id="1_3rnhx"]
-[ext_resource type="Script" path="res://assets/Mobs/Ball/Ball.gd" id="1_5lpa5"]
-[ext_resource type="PackedScene" uid="uid://dw3bu1txnr0hg" path="res://assets/weapons/hurtbox.tscn" id="3_4wr3u"]
-[ext_resource type="AudioStream" uid="uid://hdmxmnu3fegi" path="res://assets/Audio/SoundFX/BallSFX.wav" id="4_tpffx"]
+[ext_resource type="PackedScene" uid="uid://xu1k1sx24agu" path="res://assets/Mobs/enemy.tscn" id="1_vpk4w"]
+[ext_resource type="Texture2D" uid="uid://bj5nj2eyntuii" path="res://assets/Mobs/Ball/Punchball.png" id="2_oowgj"]
+[ext_resource type="AudioStream" uid="uid://hdmxmnu3fegi" path="res://assets/Audio/SoundFX/BallSFX.wav" id="3_1mq31"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ywicy"]
-radius = 17.0294
+[sub_resource type="CircleShape2D" id="CircleShape2D_shmwq"]
+radius = 16.0312
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_igs21"]
-radius = 17.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_imeew"]
+radius = 16.1245
 
-[node name="Ball" type="CharacterBody2D"]
-collision_layer = 16
-collision_mask = 67
-script = ExtResource("1_5lpa5")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, -1)
-texture = ExtResource("1_3rnhx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_ywicy")
-
-[node name="Hurtbox" parent="." instance=ExtResource("3_4wr3u")]
-collision_layer = 32
-collision_mask = 65
+[node name="Ball" instance=ExtResource("1_vpk4w")]
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource("CircleShape2D_igs21")
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_shmwq")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_tpffx")
+[node name="Sprite2D" parent="Flip" index="0"]
+position = Vector2(1, -17)
+texture = ExtResource("2_oowgj")
 
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_imeew")
+
+[node name="Hitsfx" parent="." index="3"]
+stream = ExtResource("3_1mq31")
 
 [editable path="Hurtbox"]

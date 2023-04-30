@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://hphiw38lau6e"]
+[gd_scene load_steps=57 format=3 uid="uid://dv316eq2r1rs6"]
 
 [ext_resource type="Script" path="res://assets/player/player.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dw3bu1txnr0hg" path="res://assets/weapons/hurtbox.tscn" id="2_jdnjj"]
@@ -18,18 +18,20 @@
 [ext_resource type="Script" path="res://assets/player/states/Attack.gd" id="13_5smcn"]
 [ext_resource type="Texture2D" uid="uid://djd7nkiqwhv1b" path="res://assets/player/Sprites/Roll.png" id="13_osq8w"]
 [ext_resource type="PackedScene" uid="uid://bjk1t51cloi4t" path="res://assets/weapons/Shield.tscn" id="14_6774i"]
-[ext_resource type="Script" path="res://assets/player/debugStateLabel.gd" id="14_bxfw1"]
 [ext_resource type="Script" path="res://assets/player/states/Grab.gd" id="14_t8v7x"]
 [ext_resource type="Texture2D" uid="uid://c34015gvpiprg" path="res://assets/player/Sprites/JAB.png" id="15_077fr"]
 [ext_resource type="Script" path="res://assets/player/states/throwShield.gd" id="15_ifs2y"]
 [ext_resource type="Texture2D" uid="uid://1v4qg0laljwo" path="res://assets/player/Sprites/kicks.png" id="16_v3ekc"]
 [ext_resource type="Script" path="res://assets/player/states/throwsmall.gd" id="17_akps4"]
 [ext_resource type="Texture2D" uid="uid://b2xn42osek0eg" path="res://assets/player/Sprites/Punch.png" id="17_i4p6i"]
-[ext_resource type="PackedScene" uid="uid://b3wc6v20vcynt" path="res://assets/Mobs/Ball/Ball.tscn" id="18_ic42c"]
+[ext_resource type="Script" path="res://assets/Mobs/Ball/Ball.gd" id="18_7m68d"]
+[ext_resource type="Texture2D" uid="uid://bj5nj2eyntuii" path="res://assets/Mobs/Ball/Punchball.png" id="19_cbnic"]
+[ext_resource type="AudioStream" uid="uid://hdmxmnu3fegi" path="res://assets/Audio/SoundFX/BallSFX.wav" id="20_8snen"]
 [ext_resource type="Texture2D" uid="uid://c5t5osjceu2ky" path="res://assets/player/Sprites/aim.png" id="20_mg4bp"]
 [ext_resource type="Texture2D" uid="uid://f62wlol7mvhl" path="res://assets/player/Sprites/D_Jump.png" id="23_b2du6"]
 [ext_resource type="Texture2D" uid="uid://d0mud4g6srlx1" path="res://assets/player/Sprites/DropKick.png" id="26_tkh1m"]
 [ext_resource type="Texture2D" uid="uid://cj3kxvd5mfesw" path="res://assets/player/Sprites/DAIR.png" id="27_h8id1"]
+[ext_resource type="Script" path="res://assets/Tools/debugStateLabel.gd" id="32_1jk0g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nyk6f"]
 size = Vector2(20, 24)
@@ -45,6 +47,25 @@ size = Vector2(14, 28)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jqwoo"]
 size = Vector2(30, 21)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ywicy"]
+radius = 17.0294
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_igs21"]
+radius = 17.0
+
+[sub_resource type="PackedScene" id="PackedScene_rk6l2"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(3, 0, 14, 13, 2, 0, 0),
+"editable_instances": [NodePath("Hurtbox")],
+"names": PackedStringArray("Ball", "collision_layer", "collision_mask", "script", "CharacterBody2D", "Sprite2D", "position", "texture", "CollisionShape2D", "shape", "Hurtbox", "AudioStreamPlayer", "stream", "_on_hurtbox_area_entered", "area_entered"),
+"node_count": 6,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 4, 0, -1, 3, 1, 0, 2, 1, 3, 2, 0, 0, 0, 5, 5, -1, 2, 6, 3, 7, 4, 0, 0, 0, 8, 8, -1, 1, 9, 5, 0, 0, 0, 2147483647, 10, 6, 2, 1, 7, 2, 8, 0, 3, -1, 2147483647, 262152, -1, 1, 9, 9, 0, 0, 0, 11, 11, -1, 1, 12, 10, 0),
+"variants": [16, 67, ExtResource("18_7m68d"), Vector2(1, -1), ExtResource("19_cbnic"), SubResource("CircleShape2D_ywicy"), ExtResource("2_jdnjj"), 32, 65, SubResource("CircleShape2D_igs21"), ExtResource("20_8snen")],
+"version": 3
+}
 
 [sub_resource type="Animation" id="Animation_upaea"]
 length = 0.001
@@ -1018,7 +1039,7 @@ animation_name = "throwing"
 
 [node name="throwsmall" type="Node" parent="state_manager"]
 script = ExtResource("17_akps4")
-Projectile = ExtResource("18_ic42c")
+Projectile = SubResource("PackedScene_rk6l2")
 idle_node = NodePath("../idle")
 fall_node = NodePath("../fall")
 walk_node = NodePath("../walk")
@@ -1065,7 +1086,7 @@ offset_top = -56.0
 offset_right = 21.0
 offset_bottom = -30.0
 text = "State"
-script = ExtResource("14_bxfw1")
+script = ExtResource("32_1jk0g")
 StateMachine_node = NodePath("../state_manager")
 
 [editable path="Hurtbox"]

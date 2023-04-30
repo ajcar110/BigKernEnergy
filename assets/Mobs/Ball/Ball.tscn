@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3wc6v20vcynt"]
+[gd_scene load_steps=7 format=3 uid="uid://qbhjrpmxdbve"]
 
 [ext_resource type="Texture2D" uid="uid://bj5nj2eyntuii" path="res://assets/Mobs/Ball/Punchball.png" id="1_3rnhx"]
 [ext_resource type="Script" path="res://assets/Mobs/Ball/Ball.gd" id="1_5lpa5"]

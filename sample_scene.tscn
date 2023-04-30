@@ -1,17 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhef1m3eungyw"]
+[gd_scene load_steps=5 format=3 uid="uid://dhef1m3eungyw"]
 
 [ext_resource type="PackedScene" uid="uid://dibgpmffabi0j" path="res://assets/floor/floor.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://hqe2bfsmirog" path="res://assets/BGS/Forest test/ForestBG1.png" id="1_ptkqk"]
-[ext_resource type="PackedScene" uid="uid://hphiw38lau6e" path="res://assets/player/player.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dv316eq2r1rs6" path="res://assets/player/player.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://b21f5qtok8j47" path="res://assets/BGS/Forest test/ForestBG2.png" id="2_tkrfo"]
-[ext_resource type="PackedScene" uid="uid://b3wc6v20vcynt" path="res://assets/Mobs/Ball/Ball.tscn" id="3_o0rr8"]
 
 [node name="sample_scene" type="Node2D"]
 
 [node name="floor" parent="." instance=ExtResource("1")]
-
-[node name="Ball" parent="." instance=ExtResource("3_o0rr8")]
-position = Vector2(181, 127)
 
 [node name="player" parent="." instance=ExtResource("2")]
 position = Vector2(78, 144)

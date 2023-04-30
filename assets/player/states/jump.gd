@@ -35,6 +35,8 @@ func physics_process(delta: float) -> BaseState:
 		player.flip.scale.x = 1
 	if Input.is_action_just_released("jump"):
 		action_released = true
+	if Input.is_action_just_pressed("attack"):
+		return air_attack_state
 	player.velocity.x = move * move_speed
 	player.velocity.y += player.gravity
 	player.set_velocity(player.velocity)

@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhef1m3eungyw"]
+[gd_scene load_steps=6 format=3 uid="uid://dhef1m3eungyw"]
 
 [ext_resource type="PackedScene" uid="uid://dibgpmffabi0j" path="res://assets/floor/floor.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://hqe2bfsmirog" path="res://assets/BGS/Forest test/ForestBG1.png" id="1_ptkqk"]
 [ext_resource type="PackedScene" uid="uid://hphiw38lau6e" path="res://assets/player/player.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://b21f5qtok8j47" path="res://assets/BGS/Forest test/ForestBG2.png" id="2_tkrfo"]
 [ext_resource type="PackedScene" uid="uid://b3wc6v20vcynt" path="res://assets/Mobs/Ball/Ball.tscn" id="3_o0rr8"]
-[ext_resource type="PackedScene" uid="uid://bw1t6jbvt5out" path="res://assets/Mobs/Hydra/hydra.tscn" id="6_bjj5a"]
 
 [node name="sample_scene" type="Node2D"]
 
@@ -21,9 +20,6 @@ position = Vector2(78, 144)
 position = Vector2(0, -81)
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
-
-[node name="Hydra" parent="." instance=ExtResource("6_bjj5a")]
-position = Vector2(233, 144)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 offset = Vector2(0, 10)

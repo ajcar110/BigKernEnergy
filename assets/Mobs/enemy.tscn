@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://xu1k1sx24agu"]
+[gd_scene load_steps=7 format=3 uid="uid://xu1k1sx24agu"]
 
 [ext_resource type="Script" path="res://assets/Mobs/enemy.gd" id="1_cb28j"]
 [ext_resource type="PackedScene" uid="uid://dw3bu1txnr0hg" path="res://assets/weapons/hurtbox.tscn" id="1_f07hx"]
 [ext_resource type="PackedScene" uid="uid://b6xyx5wf2vb4m" path="res://assets/weapons/hitbox.tscn" id="2_a6kx8"]
+[ext_resource type="PackedScene" path="res://assets/player/states/state_manager.tscn" id="4_hbvnf"]
 [ext_resource type="AudioStream" uid="uid://bxijgnqshplsg" path="res://assets/Audio/SoundFX/hits WAV/hit37.wav" id="4_k8a34"]
+[ext_resource type="Script" path="res://assets/player/states/base_state.gd" id="5_rxwep"]
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 16
@@ -20,7 +22,23 @@ collision_layer = 32
 
 [node name="Hitbox" parent="Flip" instance=ExtResource("2_a6kx8")]
 
+[node name="state_manager" parent="." instance=ExtResource("4_hbvnf")]
+
+[node name="idle" type="Node" parent="state_manager"]
+script = ExtResource("5_rxwep")
+
+[node name="fall" type="Node" parent="state_manager"]
+script = ExtResource("5_rxwep")
+
+[node name="grabbed" type="Node" parent="state_manager"]
+script = ExtResource("5_rxwep")
+
+[node name="hurt" type="Node" parent="state_manager"]
+script = ExtResource("5_rxwep")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="Hitsfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_k8a34")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

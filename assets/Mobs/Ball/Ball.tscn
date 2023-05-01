@@ -20,11 +20,11 @@ shape = SubResource("CircleShape2D_shmwq")
 position = Vector2(1, -17)
 texture = ExtResource("2_oowgj")
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_imeew")
 
-[node name="Hitsfx" parent="." index="3"]
+[node name="Hitsfx" parent="." index="4"]
 stream = ExtResource("3_1mq31")
 
 [editable path="Hurtbox"]

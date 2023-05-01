@@ -70,7 +70,7 @@ func throw(projectile):
 	p.global_position = grab_point.global_position
 	if p.name=="Shield":
 		shield_out = true
-	p.returned.connect(_on_shield_returned)
+		p.returned.connect(_on_shield_returned)
 	
 func _on_shield_returned():
 	shield_out = false

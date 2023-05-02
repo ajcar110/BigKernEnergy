@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://hqe2bfsmirog" path="res://assets/BGS/Forest test/ForestBG1.png" id="1_ptkqk"]
 [ext_resource type="PackedScene" uid="uid://dv316eq2r1rs6" path="res://assets/player/player.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://b21f5qtok8j47" path="res://assets/BGS/Forest test/ForestBG2.png" id="2_tkrfo"]
-[ext_resource type="PackedScene" uid="uid://t6aywslpqpeh" path="res://assets/Mobs/Kob/kob.tscn" id="6_4beb8"]
+[ext_resource type="PackedScene" uid="uid://5jg1vi74nj5s" path="res://assets/Mobs/Kob/kob.tscn" id="6_4beb8"]
 
 [node name="sample_scene" type="Node2D"]
 

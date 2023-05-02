@@ -3,6 +3,8 @@ extends Node
 
 @export var animation_name:String
 
+signal interupt_state(new_state : BaseState)
+
 # Pass in a reference to the player's kinematic body so that it can be used by the state
 var player: CharacterBody2D
 

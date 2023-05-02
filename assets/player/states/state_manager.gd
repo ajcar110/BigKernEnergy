@@ -17,6 +17,9 @@ func change_state(new_state: BaseState) -> void:
 func init(player: CharacterBody2D) -> void:
 	for child in get_children():
 		child.player = player
+		
+		#connect to interupts
+		child.connect("interupt_state", _on_state_interupt)
 
 	# Initialize with a default state of idle
 	change_state(get_node(starting_state))
@@ -37,3 +40,7 @@ func process(delta: float) -> void:
 	var new_state = current_state.process(delta)
 	if new_state:
 		change_state(new_state)
+
+
+func _on_state_interupt(new_state: BaseState):
+	change_state(new_state)

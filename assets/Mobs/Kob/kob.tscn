@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://t6aywslpqpeh"]
+[gd_scene load_steps=12 format=3 uid="uid://t6aywslpqpeh"]
 
 [ext_resource type="PackedScene" uid="uid://xu1k1sx24agu" path="res://assets/Mobs/enemy.tscn" id="1_h0h23"]
 [ext_resource type="Texture2D" uid="uid://d070pvoolcju8" path="res://assets/Mobs/Kob/Idle.png" id="2_a2snr"]
 [ext_resource type="AudioStream" uid="uid://djtcdm7dnmib" path="res://assets/Audio/SoundFX/hits WAV/hit14.wav" id="3_n4udl"]
+[ext_resource type="Script" path="res://assets/Mobs/hurt.gd" id="3_xcrjo"]
 [ext_resource type="Texture2D" uid="uid://bytvwdmhlejk5" path="res://assets/Mobs/Kob/Hurt.png" id="4_p43q7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_idc5v"]
@@ -10,47 +11,6 @@ size = Vector2(23, 29)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k2jun"]
 size = Vector2(13, 29)
-
-[sub_resource type="Animation" id="Animation_fri8n"]
-resource_name = "idle"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Flip/Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_a2snr")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Flip/Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Flip/Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
 
 [sub_resource type="Animation" id="Animation_6n0lr"]
 length = 0.001
@@ -100,7 +60,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 0, 0, 1)]
+"values": [Color(1, 0.988235, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ycj1i"]
@@ -155,6 +115,59 @@ tracks/3/keys = {
 "values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_fri8n"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flip/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_a2snr")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flip/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flip/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flip/Sprite2D:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gdpii"]
 _data = {
 "RESET": SubResource("Animation_6n0lr"),
@@ -164,30 +177,37 @@ _data = {
 
 [node name="Kob" instance=ExtResource("1_h0h23")]
 
+[node name="TextureProgressBar" parent="." index="0"]
+offset_left = -21.0
+offset_top = -41.0
+offset_right = 21.0
+offset_bottom = -33.0
+
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2(-1.5, -14.5)
 shape = SubResource("RectangleShape2D_idc5v")
 
 [node name="Sprite2D" parent="Flip" index="0"]
-modulate = Color(1, 0, 0, 1)
+modulate = Color(1, 0.988235, 1, 1)
 position = Vector2(0, -24)
 texture = ExtResource("2_a2snr")
 hframes = 8
 
-[node name="state_manager" parent="." index="2"]
-starting_state = NodePath("idle")
+[node name="hurt" parent="state_manager" index="3"]
+script = ExtResource("3_xcrjo")
+animation_name = "hurt"
 
-[node name="idle" parent="state_manager" index="0"]
-animation_name = "idle"
+[node name="dead" parent="state_manager" index="4"]
+animation_name = "dead"
 
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="4"]
 position = Vector2(-1.5, -14.5)
 shape = SubResource("RectangleShape2D_k2jun")
 
-[node name="Hitsfx" parent="." index="4"]
+[node name="Hitsfx" parent="." index="5"]
 stream = ExtResource("3_n4udl")
 
-[node name="AnimationPlayer" parent="." index="5"]
+[node name="AnimationPlayer" parent="." index="6"]
 autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_gdpii")

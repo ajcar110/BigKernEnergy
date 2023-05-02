@@ -14,7 +14,7 @@ func change_state(new_state: BaseState) -> void:
 # Initialize the state machine by giving each state a reference to the objects
 # owned by the parent that they should be able to take control of
 # and set a default state
-func init(player: Player) -> void:
+func init(player: CharacterBody2D) -> void:
 	for child in get_children():
 		child.player = player
 

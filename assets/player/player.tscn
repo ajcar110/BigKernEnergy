@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dv316eq2r1rs6"]
+[gd_scene load_steps=60 format=3 uid="uid://dv316eq2r1rs6"]
 
 [ext_resource type="Script" path="res://assets/player/player.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dw3bu1txnr0hg" path="res://assets/weapons/hurtbox.tscn" id="2_jdnjj"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://assets/player/states/idle.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://b6xyx5wf2vb4m" path="res://assets/weapons/hitbox.tscn" id="4_i5611"]
 [ext_resource type="Script" path="res://assets/player/states/jump.gd" id="5"]
+[ext_resource type="Script" path="res://assets/player/Grabbox.gd" id="5_ev6v3"]
 [ext_resource type="Script" path="res://assets/player/states/run.gd" id="6"]
 [ext_resource type="Script" path="res://assets/player/states/fall.gd" id="7"]
 [ext_resource type="Script" path="res://assets/player/states/roll.gd" id="7_xxtve"]
@@ -50,6 +51,9 @@ size = Vector2(14, 28)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jqwoo"]
 size = Vector2(30, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6f0hp"]
+size = Vector2(32, 21)
 
 [sub_resource type="Animation" id="Animation_upaea"]
 length = 0.001
@@ -650,6 +654,18 @@ tracks/3/keys = {
 "method": &"ready_to_attack"
 }]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Flip/Grabbox:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_ohjxx"]
 resource_name = "idle"
@@ -1051,15 +1067,16 @@ _data = {
 }
 
 [node name="player" type="CharacterBody2D"]
-collision_mask = 22
+collision_mask = 6
 script = ExtResource("2")
-throw_distance = 50.0
 
 [node name="Stand" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -12)
 shape = SubResource("RectangleShape2D_nyk6f")
 
 [node name="Crouch" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_x8vhq")
 
@@ -1097,6 +1114,17 @@ shape = SubResource("RectangleShape2D_jqwoo")
 
 [node name="GrabPoint" type="Marker2D" parent="Flip"]
 position = Vector2(-6, -12)
+
+[node name="Grabbox" type="Area2D" parent="Flip"]
+collision_mask = 32
+monitoring = false
+script = ExtResource("5_ev6v3")
+throw_node = NodePath("../../state_manager/throwsmall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flip/Grabbox"]
+position = Vector2(22, -14.5)
+shape = SubResource("RectangleShape2D_6f0hp")
+debug_color = Color(0.670588, 0.509804, 0.105882, 0.419608)
 
 [node name="state_manager" parent="." instance=ExtResource("3")]
 starting_state = NodePath("idle")
@@ -1297,6 +1325,8 @@ show_behind_parent = true
 texture = ExtResource("35_bo10s")
 script = ExtResource("36_7owp1")
 target = NodePath("../Flip/GrabPoint")
+
+[connection signal="area_entered" from="Flip/Grabbox" to="Flip/Grabbox" method="_on_area_entered"]
 
 [editable path="Hurtbox"]
 [editable path="Flip/Hitbox"]

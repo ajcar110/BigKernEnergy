@@ -36,6 +36,6 @@ func _on_return_timer_timeout():
 func _on_area_2d_body_entered(body):
 	if body.name == "player" && !is_returning:
 		print("ding")
-		body.velocity.y = -bounce
+		body.velocity.y -= bounce
 		emit_signal("returned")
 		queue_free()

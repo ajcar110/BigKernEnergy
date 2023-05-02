@@ -8,7 +8,6 @@ var health :float = MaxHealth
 signal on_hit(node: Node, damage_taken : int, knockback_direction: Vector2 )
 
 
-
 func hit(damage: int, knockback_direction: Vector2):
 	health-= damage
 	

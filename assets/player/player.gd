@@ -8,6 +8,7 @@ var No_vector: bool
 var shield_out:bool = false
 var holding: bool = false
 var can_attack:bool = true
+var throwhp = 0
 
 
 
@@ -67,10 +68,13 @@ func aim():
 func throw(projectile):
 	var p = projectile.instantiate()
 	get_parent().add_child(p)
-	p.global_position = grab_point.global_position
+	p.global_position = throw_target.global_position
 	if p.name=="Shield":
 		shield_out = true
 		p.returned.connect(_on_shield_returned)
+	if p is Enemy:
+		p.damagable.health = throwhp
+		print("playerthrow val " + str(throwhp))
 	
 func _on_shield_returned():
 	shield_out = false

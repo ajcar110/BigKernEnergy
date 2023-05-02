@@ -216,6 +216,7 @@ _data = {
 }
 
 [node name="Kob" instance=ExtResource("1_h0h23")]
+gravity = 3
 
 [node name="TextureProgressBar" parent="." index="0"]
 offset_left = -21.0
@@ -233,9 +234,7 @@ position = Vector2(0, -24)
 texture = ExtResource("2_s1wt5")
 hframes = 8
 
-[node name="hurt" parent="state_manager" index="3" node_paths=PackedStringArray("damagable")]
-damagable = NodePath("../../Damagable")
-dead_node = NodePath("../dead")
+[node name="hurt" parent="state_manager" index="3"]
 animation_name = "hurt"
 
 [node name="CollisionShape2D" parent="." index="4"]

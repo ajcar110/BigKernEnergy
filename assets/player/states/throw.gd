@@ -14,8 +14,12 @@ extends BaseState
 @onready var walk_state= get_node(walk_node)
 @onready var run_state= get_node(run_node)
 
+var throwhp = 0
+
 func throw():
+	player.throwhp = throwhp
 	player.throw(Projectile)
+	print("throwstate val" + str(throwhp))
 
 func process(delta):
 	var move = 0
@@ -34,3 +38,6 @@ func process(delta):
 			else:
 				return idle_state
 	return null
+
+func exit():
+	throwhp = 0

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba1ug0ll4ytlq"]
+
+[ext_resource type="Script" path="res://assets/weapons/damagable.gd" id="1_w7eqt"]
+
+[node name="Damagable" type="Node"]
+script = ExtResource("1_w7eqt")

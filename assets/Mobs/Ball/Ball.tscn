@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://blct0oc24qlq1"]
+
+[ext_resource type="PackedScene" uid="uid://xu1k1sx24agu" path="res://assets/Mobs/enemy.tscn" id="1_vpk4w"]
+[ext_resource type="Texture2D" uid="uid://bj5nj2eyntuii" path="res://assets/Mobs/Ball/Punchball.png" id="2_oowgj"]
+[ext_resource type="AudioStream" uid="uid://hdmxmnu3fegi" path="res://assets/Audio/SoundFX/BallSFX.wav" id="3_1mq31"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_shmwq"]
+radius = 16.0312
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_imeew"]
+radius = 16.1245
+
+[node name="Ball" instance=ExtResource("1_vpk4w")]
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_shmwq")
+
+[node name="Sprite2D" parent="Flip" index="0"]
+position = Vector2(1, -17)
+texture = ExtResource("2_oowgj")
+
+[node name="CollisionShape2D" parent="." index="3"]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_imeew")
+
+[node name="Hitsfx" parent="." index="4"]
+stream = ExtResource("3_1mq31")
+
+[editable path="Hurtbox"]

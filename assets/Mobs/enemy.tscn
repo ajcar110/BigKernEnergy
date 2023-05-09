@@ -1,0 +1,90 @@
+[gd_scene load_steps=16 format=3 uid="uid://xu1k1sx24agu"]
+
+[ext_resource type="Script" path="res://assets/Mobs/enemy.gd" id="1_cb28j"]
+[ext_resource type="PackedScene" uid="uid://dw3bu1txnr0hg" path="res://assets/weapons/hurtbox.tscn" id="1_f07hx"]
+[ext_resource type="PackedScene" uid="uid://b6xyx5wf2vb4m" path="res://assets/weapons/hitbox.tscn" id="2_a6kx8"]
+[ext_resource type="PackedScene" uid="uid://8y2dybhkn8fi" path="res://assets/player/states/state_manager.tscn" id="4_hbvnf"]
+[ext_resource type="AudioStream" uid="uid://bxijgnqshplsg" path="res://assets/Audio/SoundFX/hits WAV/hit37.wav" id="4_k8a34"]
+[ext_resource type="Script" path="res://assets/Mobs/UI/HPBAR.gd" id="4_v8066"]
+[ext_resource type="Script" path="res://assets/player/states/base_state.gd" id="5_rxwep"]
+[ext_resource type="PackedScene" uid="uid://ba1ug0ll4ytlq" path="res://assets/weapons/damagable.tscn" id="7_i4k3j"]
+[ext_resource type="Script" path="res://assets/Mobs/Enemyidle.gd" id="8_1nj87"]
+[ext_resource type="Texture2D" uid="uid://b8v15m2x30ggd" path="res://assets/Mobs/UI/HpBarUnder.png" id="8_qj37x"]
+[ext_resource type="Texture2D" uid="uid://wtbbjxdii6kh" path="res://assets/Mobs/UI/HpBarProgress.png" id="9_4sydn"]
+[ext_resource type="Script" path="res://assets/Mobs/Enemyfall.gd" id="9_f1a3s"]
+[ext_resource type="Script" path="res://assets/Mobs/hurt.gd" id="9_o28lf"]
+[ext_resource type="Script" path="res://assets/Mobs/Enemygrabbed.gd" id="10_h65xo"]
+[ext_resource type="Script" path="res://assets/Tools/debugStateLabel.gd" id="12_nbf7w"]
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 7
+script = ExtResource("1_cb28j")
+hitsfx_node = NodePath("Hitsfx")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -19.0
+offset_top = -29.0
+offset_right = 23.0
+offset_bottom = -21.0
+texture_under = ExtResource("8_qj37x")
+texture_progress = ExtResource("9_4sydn")
+script = ExtResource("4_v8066")
+Damageable = NodePath("../Damagable")
+
+[node name="Hurtbox" parent="." instance=ExtResource("1_f07hx")]
+collision_layer = 32
+
+[node name="Flip" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Flip"]
+
+[node name="Hitbox" parent="Flip" instance=ExtResource("2_a6kx8")]
+
+[node name="state_manager" parent="." instance=ExtResource("4_hbvnf")]
+starting_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="state_manager"]
+script = ExtResource("8_1nj87")
+fall_node = NodePath("../fall")
+animation_name = "idle"
+
+[node name="fall" type="Node" parent="state_manager"]
+script = ExtResource("9_f1a3s")
+idle_node = NodePath("../idle")
+
+[node name="grabbed" type="Node" parent="state_manager"]
+script = ExtResource("10_h65xo")
+animation_name = "grabbed"
+
+[node name="hurt" type="Node" parent="state_manager"]
+script = ExtResource("9_o28lf")
+dead_node = NodePath("../dead")
+idle_node = NodePath("../idle")
+fall_node = NodePath("../fall")
+states = NodePath("..")
+
+[node name="dead" type="Node" parent="state_manager"]
+script = ExtResource("5_rxwep")
+animation_name = "dead"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Hitsfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_k8a34")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Damagable" parent="." instance=ExtResource("7_i4k3j")]
+
+[node name="StateDebug" type="Label" parent="."]
+offset_left = -18.0
+offset_top = -48.0
+offset_right = 22.0
+offset_bottom = -22.0
+text = "State"
+script = ExtResource("12_nbf7w")
+StateMachine_node = NodePath("../state_manager")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="state_manager/hurt" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="Damagable" method="_on_animation_player_animation_finished"]

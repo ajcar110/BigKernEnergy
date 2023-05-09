@@ -1,5 +1,10 @@
 extends MoveState
 
+
+func enter() -> void:
+	super.enter()
+	player.jumps = 3
+
 func input(event: InputEvent) -> BaseState:
 	# First run parent code and make sure we don't need to exit early
 	# based on its logic

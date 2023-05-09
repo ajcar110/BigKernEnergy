@@ -39,3 +39,5 @@ func _on_area_2d_body_entered(body):
 		body.velocity.y -= bounce
 		emit_signal("returned")
 		queue_free()
+	elif body is Enemy && !is_returning:
+		body.velocity = -body.velocity

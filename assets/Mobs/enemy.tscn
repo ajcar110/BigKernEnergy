@@ -68,6 +68,10 @@ states = NodePath("..")
 script = ExtResource("5_rxwep")
 animation_name = "dead"
 
+[node name="thrown" type="Node" parent="state_manager"]
+script = ExtResource("5_rxwep")
+animation_name = "grabbed"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="Hitsfx" type="AudioStreamPlayer2D" parent="."]

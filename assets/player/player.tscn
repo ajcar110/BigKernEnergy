@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://b0min3jil1p2y"]
+[gd_scene load_steps=60 format=3 uid="uid://b0min3jil1p2y"]
 
 [ext_resource type="Script" path="res://assets/player/player.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dw3bu1txnr0hg" path="res://assets/weapons/hurtbox.tscn" id="2_jdnjj"]
@@ -24,12 +24,14 @@
 [ext_resource type="Texture2D" uid="uid://1v4qg0laljwo" path="res://assets/player/Sprites/kicks.png" id="16_v3ekc"]
 [ext_resource type="Script" path="res://assets/player/states/throwObjects.gd" id="17_2dg27"]
 [ext_resource type="Texture2D" uid="uid://b2xn42osek0eg" path="res://assets/player/Sprites/Punch.png" id="17_i4p6i"]
+[ext_resource type="PackedScene" uid="uid://bjk1t51cloi4t" path="res://assets/weapons/Shield.tscn" id="17_loksf"]
 [ext_resource type="Texture2D" uid="uid://c5t5osjceu2ky" path="res://assets/player/Sprites/aim.png" id="20_mg4bp"]
 [ext_resource type="Texture2D" uid="uid://f62wlol7mvhl" path="res://assets/player/Sprites/D_Jump.png" id="23_b2du6"]
 [ext_resource type="Texture2D" uid="uid://d0mud4g6srlx1" path="res://assets/player/Sprites/DropKick.png" id="26_tkh1m"]
 [ext_resource type="Texture2D" uid="uid://cj3kxvd5mfesw" path="res://assets/player/Sprites/DAIR.png" id="27_h8id1"]
 [ext_resource type="Texture2D" uid="uid://cdqrcutrwcgy4" path="res://assets/player/Sprites/Throw.png" id="29_afcwt"]
 [ext_resource type="Script" path="res://assets/Tools/debugStateLabel.gd" id="32_1jk0g"]
+[ext_resource type="Script" path="res://assets/player/HoldingDebug.gd" id="32_3xn22"]
 [ext_resource type="AudioStream" uid="uid://8y5corrlwrod" path="res://assets/Audio/SoundFX/Character/Step.wav" id="33_aq2of"]
 [ext_resource type="AudioStream" uid="uid://l4e0njshsurj" path="res://assets/Audio/SoundFX/Character/Swing.wav" id="34_dx0nd"]
 [ext_resource type="Texture2D" uid="uid://cr42inujlb2cc" path="res://assets/player/Sprites/Bounce shield.png" id="35_bo10s"]
@@ -903,7 +905,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(8, -14), Vector2(2, -17), Vector2(-12, -24), Vector2(-11, -9), Vector2(13, -12), Vector2(-6, -30), Vector2(-13, -9), Vector2(17, -28), Vector2(-15, -30)]
+"values": [Vector2(8, -4), Vector2(2, -9), Vector2(-12, -13), Vector2(-11, -4), Vector2(13, -6), Vector2(-6, -12), Vector2(-9, -3), Vector2(17, -28), Vector2(-15, -30)]
 }
 tracks/4/type = "method"
 tracks/4/imported = false
@@ -1129,6 +1131,7 @@ monitoring = false
 script = ExtResource("5_ev6v3")
 throw_node = NodePath("../../state_manager/throwObjects")
 grab_point_node = NodePath("../GrabPoint")
+character_node = NodePath("../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flip/Grabbox"]
 position = Vector2(22, -14.5)
@@ -1256,10 +1259,17 @@ animation_name = "attack3"
 [node name="Grab" type="Node" parent="state_manager"]
 script = ExtResource("14_t8v7x")
 throw_node = NodePath("../throwObjects")
+idle_node = NodePath("../idle")
 animation_name = "grab"
 
 [node name="throwProjectiles" type="Node" parent="state_manager"]
 script = ExtResource("16_c86j8")
+Projectile = ExtResource("17_loksf")
+idle_node = NodePath("../idle")
+fall_node = NodePath("../fall")
+walk_node = NodePath("../walk")
+run_node = NodePath("../run")
+animation_name = "throwshield"
 
 [node name="throwObjects" type="Node" parent="state_manager"]
 script = ExtResource("17_2dg27")
@@ -1299,7 +1309,7 @@ libraries = {
 [node name="Sprite2D" type="Sprite2D" parent="ThrowTarget"]
 texture = ExtResource("20_mg4bp")
 
-[node name="Label" type="Label" parent="."]
+[node name="StateDebug" type="Label" parent="."]
 offset_left = -19.0
 offset_top = -56.0
 offset_right = 21.0
@@ -1307,6 +1317,13 @@ offset_bottom = -30.0
 text = "State"
 script = ExtResource("32_1jk0g")
 StateMachine_node = NodePath("../state_manager")
+
+[node name="HoldingDebug" type="Label" parent="."]
+offset_left = -18.0
+offset_top = -74.0
+offset_right = 22.0
+offset_bottom = -51.0
+script = ExtResource("32_3xn22")
 
 [node name="Audio" type="Node" parent="."]
 

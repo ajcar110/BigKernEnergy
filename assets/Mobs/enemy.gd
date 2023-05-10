@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @export var hitsfx_node:NodePath
 @export var gravity = 4
+@export var can_be_grabbed: bool = false
 
 
 @onready var Hitsfx = get_node(hitsfx_node)

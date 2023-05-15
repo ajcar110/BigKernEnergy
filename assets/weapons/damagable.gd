@@ -8,6 +8,7 @@ var health :float = MaxHealth
 
 signal on_hit(node: Node, damage_taken : int, knockback_direction: Vector2 )
 signal on_grabbed(position: Node)
+signal on_thrown(position: Node)
 
 func _process(delta):
 	if health <= MaxHealth/2:
@@ -22,6 +23,10 @@ func hit(damage: int, knockback_direction: Vector2):
 func grabbed(position: Node):
 	
 	emit_signal("on_grabbed", position)
+
+func thrown(position: Node):
+	emit_signal("on_thrown", position)
+
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "dead":

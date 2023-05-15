@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://xu1k1sx24agu"]
+[gd_scene load_steps=17 format=3 uid="uid://xu1k1sx24agu"]
 
 [ext_resource type="Script" path="res://assets/Mobs/enemy.gd" id="1_cb28j"]
 [ext_resource type="PackedScene" uid="uid://dw3bu1txnr0hg" path="res://assets/weapons/hurtbox.tscn" id="1_f07hx"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://assets/Mobs/hurt.gd" id="9_o28lf"]
 [ext_resource type="Script" path="res://assets/Mobs/Enemygrabbed.gd" id="10_h65xo"]
 [ext_resource type="Script" path="res://assets/Tools/debugStateLabel.gd" id="12_nbf7w"]
+[ext_resource type="Script" path="res://assets/Mobs/Enemythrown.gd" id="13_qihq7"]
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 16
@@ -55,6 +56,7 @@ idle_node = NodePath("../idle")
 
 [node name="grabbed" type="Node" parent="state_manager"]
 script = ExtResource("10_h65xo")
+thrown_state_node = NodePath("../thrown")
 animation_name = "grabbed"
 
 [node name="hurt" type="Node" parent="state_manager"]
@@ -69,7 +71,7 @@ script = ExtResource("5_rxwep")
 animation_name = "dead"
 
 [node name="thrown" type="Node" parent="state_manager"]
-script = ExtResource("5_rxwep")
+script = ExtResource("13_qihq7")
 animation_name = "grabbed"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
